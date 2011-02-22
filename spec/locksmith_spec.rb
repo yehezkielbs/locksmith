@@ -42,6 +42,16 @@ describe 'Locksmith' do
     end
   end
 
+  it 'should be able create an instance with defaults' do
+    locksmith = Locksmith.new('my password', 'my domain')
+    locksmith.private_password.should == 'my password'
+    locksmith.domain.should == 'my domain'
+    locksmith.username.should == ''
+    locksmith.use_alphabet?.should == true
+    locksmith.use_number?.should == true
+    locksmith.use_symbol?.should == true
+  end
+
   describe 'validation' do
     it 'should be able to validate' do
       @locksmith.valid?.should == true

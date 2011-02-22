@@ -10,13 +10,13 @@ class Locksmith
   @@symbol_hex = Tuwaga.new(16, '~!@#$%^&*()_+-={')
   @@hex = Tuwaga.new(16)
 
-  def initialize private_password, domain, username, options
+  def initialize private_password, domain, username = '', options = {}
     @private_password = private_password
     @domain = domain
     @username = username
-    @use_alphabet = options[:use_alphabet]
-    @use_number = options[:use_number]
-    @use_symbol = options[:use_symbol]
+    @use_alphabet = options.has_key?(:use_alphabet) ? options[:use_alphabet] : true
+    @use_number = options.has_key?(:use_number) ? options[:use_number] : true
+    @use_symbol = options.has_key?(:use_symbol) ? options[:use_symbol] : true
 
     @errors = []
   end
