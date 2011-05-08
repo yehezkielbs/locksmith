@@ -8,7 +8,8 @@ describe 'Locksmith' do
     @options = {
         :use_alphabet => true,
         :use_number => true,
-        :use_symbol => true
+        :use_symbol => true,
+        :max_length => 100
     }
     @locksmith = Locksmith.new(@private_password, @domain, @username, @options)
   end
@@ -20,6 +21,7 @@ describe 'Locksmith' do
     @locksmith.use_alphabet?.should == true
     @locksmith.use_number?.should == true
     @locksmith.use_symbol?.should == true
+    @locksmith.max_length.should == 100
   end
 
   it 'should be able to change the attributes' do
@@ -143,6 +145,7 @@ describe 'Locksmith' do
     end
 
     it 'should be able to limit the generated password length' do
+      @locksmith.max_length = nil
       generated_password = @locksmith.generated_password
 
       @locksmith.max_length = 6
@@ -153,9 +156,6 @@ describe 'Locksmith' do
 
       @locksmith.max_length = 0
       @locksmith.generated_password.should == ''
-
-      @locksmith.max_length = nil
-      @locksmith.generated_password.should == generated_password
     end
   end
 end

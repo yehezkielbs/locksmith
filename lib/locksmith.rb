@@ -17,6 +17,7 @@ class Locksmith
     @use_alphabet = options.has_key?(:use_alphabet) ? options[:use_alphabet] : true
     @use_number = options.has_key?(:use_number) ? options[:use_number] : true
     @use_symbol = options.has_key?(:use_symbol) ? options[:use_symbol] : true
+    @max_length = options.has_key?(:max_length) ? options[:max_length] : nil
 
     @errors = []
   end
