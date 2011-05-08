@@ -141,5 +141,21 @@ describe 'Locksmith' do
       @locksmith.use_symbol = true
       @locksmith.generated_password.should match /^[~!@#\$%^&*()_+-={}|\[\]\\;':"<>?,.\/]+$/
     end
+
+    it 'should be able to limit the generated password length' do
+      generated_password = @locksmith.generated_password
+
+      @locksmith.max_length = 6
+      @locksmith.generated_password.should == generated_password[0,6]
+
+      @locksmith.max_length = 1000
+      @locksmith.generated_password.should == generated_password
+
+      @locksmith.max_length = 0
+      @locksmith.generated_password.should == ''
+
+      @locksmith.max_length = nil
+      @locksmith.generated_password.should == generated_password
+    end
   end
 end

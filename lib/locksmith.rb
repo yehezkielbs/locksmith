@@ -3,7 +3,7 @@ require 'tuwaga'
 require 'digest/md5'
 
 class Locksmith
-  attr_accessor :private_password, :domain, :username
+  attr_accessor :private_password, :domain, :username, :max_length
   attr_reader :errors
 
   @@alpha_hex = Tuwaga.new(16, 'abcdefghijklmnop')
@@ -94,6 +94,10 @@ class Locksmith
       base_x_symbols += '~!@#$%^&*()_+-={}|[]\\;\':"<>?,./' if @use_symbol
       base_x = Tuwaga.new(base_x_symbols.length, base_x_symbols)
       result += base_x.convert_from(hex_string, @@hex)
+
+      if @max_length
+        result = result[0,@max_length]
+      end
 
       result
     else
